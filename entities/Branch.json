@@ -1,0 +1,52 @@
+{
+  "name": "Branch",
+  "type": "object",
+  "properties": {
+    "developer_name": {
+      "type": "string",
+      "description": "Name of the developer who created the branch"
+    },
+    "branch_name": {
+      "type": "string",
+      "description": "Name of the created branch"
+    },
+    "parent_branch": {
+      "type": "string",
+      "description": "The parent branch from which this was created"
+    },
+    "changes_description": {
+      "type": "string",
+      "description": "Description of changes being done in this branch"
+    },
+    "has_jira_task": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether a Jira task is linked"
+    },
+    "jira_link": {
+      "type": "string",
+      "description": "Link to the Jira task if applicable"
+    },
+    "merged_with_dev": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether merged with dev branch"
+    },
+    "merged_with_demo": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether merged with demo branch"
+    },
+    "merged_with_beta": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether merged with beta branch"
+    }
+  },
+  "required": [
+    "developer_name",
+    "branch_name",
+    "parent_branch",
+    "changes_description"
+  ]
+}
