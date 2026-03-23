@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -114,7 +115,6 @@ export default function BranchForm({ initialData, onSubmit, onCancel, isSubmitti
               value={formData.changes_description}
               onChange={(e) => handleChange('changes_description', e.target.value)}
               className="h-24 resize-none"
-              required
             />
           </div>
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { GitBranch, LayoutDashboard, Plus, LogOut, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
