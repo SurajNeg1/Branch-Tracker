@@ -1,8 +1,10 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { GitBranch, AlertCircle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,6 +13,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,9 +21,13 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      // TODO: Implement custom backend API call for login
-      // This will be replaced with your own backend API integration
-      throw new Error('Login API not yet implemented. Please implement your own backend API.');
+      await login(email, password);
+      toast({
+        title: 'Success',
+        description: 'Logged in successfully',
+        variant: 'success',
+      });
+      navigate('/Dashboard');
     } catch (err) {
       console.error('Login error:', err);
       setError(err.message || 'Failed to login. Please check your credentials.');

@@ -4,6 +4,7 @@ import { GitBranch, LayoutDashboard, Plus, LogOut, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
 
+/** @type {React.FC} */
 export default function AppLayout() {
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -14,7 +15,7 @@ export default function AppLayout() {
     { path: '/AddBranch', label: 'New Branch', icon: Plus },
   ];
 // isAdmin
-  if (true) {
+  if (isAdmin) {
     navItems.push({ path: '/AdminView', label: 'Admin View', icon: Shield });
   }
 

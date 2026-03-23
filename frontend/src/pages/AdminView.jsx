@@ -1,8 +1,10 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '@/lib/AuthContext';
+import { apiClient } from '@/api/client';
 import { Navigate } from 'react-router-dom';
-import { toast } from 'sonner';
+import { useToast } from '@/components/ui/use-toast';
 import StatsCards from '@/components/branch/StatsCards';
 import BranchTable from '@/components/branch/BranchTable';
 import BranchFilters from '@/components/branch/BranchFilters';
@@ -12,6 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function AdminView() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [search, setSearch] = useState('');
   const [mergeFilter, setMergeFilter] = useState('all');
   const [editingBranch, setEditingBranch] = useState(null);
@@ -19,31 +22,50 @@ export default function AdminView() {
   const { data: branches = [], isLoading } = useQuery({
     queryKey: ['all-branches'],
     queryFn: async () => {
-      // TODO: Implement custom backend API call to fetch all branches
-      throw new Error('Fetch branches API not yet implemented. Please implement your own backend API.');
+      return await apiClient.getBranches();
     },
   });
 
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }) => {
-      // TODO: Implement custom backend API call to update branch
-      throw new Error('Update branch API not yet implemented. Please implement your own backend API.');
+      await apiClient.updateBranch(id, data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-branches'] });
       setEditingBranch(null);
-      toast.success('Branch updated!');
+      toast({
+        title: 'Success',
+        description: 'Branch updated!',
+        variant: 'success',
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to update branch',
+        variant: 'destructive',
+      });
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      // TODO: Implement custom backend API call to delete branch
-      throw new Error('Delete branch API not yet implemented. Please implement your own backend API.');
+      return await apiClient.deleteBranch(id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-branches'] });
-      toast.success('Branch deleted!');
+      toast({
+        title: 'Success',
+        description: 'Branch deleted!',
+        variant: 'success',
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to delete branch',
+        variant: 'destructive',
+      });
     },
   });
 

@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search } from 'lucide-react';
 
+/** @type {React.FC<{search: string; onSearchChange: Function; mergeFilter: string; onMergeFilterChange: Function}>} */
 export default function BranchFilters({ search, onSearchChange, mergeFilter, onMergeFilterChange }) {
   return (
     <div className="flex flex-col sm:flex-row gap-3">

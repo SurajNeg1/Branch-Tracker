@@ -1,8 +1,10 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { GitBranch, AlertCircle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,7 @@ export default function SignUp() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,9 +58,12 @@ export default function SignUp() {
     setIsLoading(true);
 
     try {
-      // TODO: Implement custom backend API call for registration
-      // This will be replaced with your own backend API integration
-      throw new Error('Sign up API not yet implemented. Please implement your own backend API.');
+      await register(formData.email, formData.password, formData.fullName);
+      toast({
+        title: 'Success',
+        description: 'Account created successfully',
+      });
+      navigate('/Dashboard');
     } catch (err) {
       console.error('Sign up error:', err);
       setError(err.message || 'Failed to create account. Please try again.');

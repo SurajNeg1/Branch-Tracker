@@ -2,6 +2,7 @@
 import { GitBranch, GitMerge, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
+/** @type {React.FC<{branches: any[]}>} */
 export default function StatsCards({ branches }) {
   const total = branches.length;
   const mergedDev = branches.filter(b => b.merged_with_dev).length;

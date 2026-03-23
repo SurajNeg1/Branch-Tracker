@@ -2,6 +2,7 @@
 import { Check, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+/** @type {React.FC<{merged: boolean; label: string}>} */
 export default function StatusBadge({ merged, label }) {
   return (
     <span

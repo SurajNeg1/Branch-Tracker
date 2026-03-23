@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import StatusBadge from './StatusBadge';
 
+/** @type {React.FC<{branches: any[]; onEdit?: Function; onDelete?: Function; showDeveloper?: boolean}>} */
 export default function BranchTable({ branches, onEdit, onDelete, showDeveloper = true }) {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
@@ -38,7 +39,7 @@ export default function BranchTable({ branches, onEdit, onDelete, showDeveloper 
         </TableHeader>
         <TableBody>
           {branches.map((branch) => (
-            <TableRow key={branch.id} className="hover:bg-muted/30 transition-colors">
+            <TableRow key={branch._id} className="hover:bg-muted/30 transition-colors">
               {showDeveloper && (
                 <TableCell>
                   <div className="flex items-center gap-2">
@@ -108,7 +109,7 @@ export default function BranchTable({ branches, onEdit, onDelete, showDeveloper 
                       variant="ghost"
                       size="icon"
                       className="h-7 w-7 text-muted-foreground hover:text-destructive"
-                      onClick={() => onDelete(branch.id)}
+                      onClick={() => onDelete(branch._id)}
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </Button>

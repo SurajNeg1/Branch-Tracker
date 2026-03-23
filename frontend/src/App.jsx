@@ -16,6 +16,7 @@ import PageNotFound from "./lib/PageNotFound";
 import { Toaster } from './components/ui/toaster';
 import SignUp from '@/pages/SignUp';
 
+
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
